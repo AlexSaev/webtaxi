@@ -17,4 +17,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//Route::group(['prefix' => 'admin', 'middleware' => []], function()
+//{
+//    Route::get('/main', function ()
+//    {
+//        return view('admin.panel');
+//    });
+//    Route::post('/automobiles', 'AdminController@')
+//}
+//);
+
 Route::get('/home', 'HomeController@index')->name('home');
