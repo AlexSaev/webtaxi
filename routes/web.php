@@ -27,4 +27,6 @@ Auth::routes();
 //}
 //);
 
+Route::get('/admin', 'AdminController@gateTesting');
+
 Route::get('/home', 'HomeController@index')->name('home');

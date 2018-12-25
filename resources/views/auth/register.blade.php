@@ -11,6 +11,20 @@
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
+                        <div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">
+                            <label for="login" class="col-md-4 control-label">Login</label>
+
+                            <div class="col-md-6">
+                                <input id="login" type="text" class="form-control" name="login" value="{{ old('login') }}" required autofocus>
+
+                                @if ($errors->has('login'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('login') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
@@ -25,6 +39,47 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('surname') ? ' has-error' : '' }}">
+                            <label for="surname" class="col-md-4 control-label">Surname</label>
+
+                            <div class="col-md-6">
+                                <input id="surname" type="text" class="form-control" name="surname" value="{{ old('surname') }}" required autofocus>
+
+                                @if ($errors->has('surname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('surname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('patronymic') ? ' has-error' : '' }}">
+                            <label for="patronymic" class="col-md-4 control-label">Patronymic</label>
+
+                            <div class="col-md-6">
+                                <input id="patronymic" type="text" class="form-control" name="patronymic" value="{{ old('patronymic') }}" required autofocus>
+
+                                @if ($errors->has('patronymic'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('patronymic') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        {{--<div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">--}}
+                            {{--<label for="login" class="col-md-4 control-label">Login</label>--}}
+
+                            {{--<div class="col-md-6">--}}
+                                {{--<input id="login" type="text" class="form-control" name="login" value="{{ old('login') }}" required autofocus>--}}
+
+                                {{--@if ($errors->has('login'))--}}
+                                    {{--<span class="help-block">--}}
+                                        {{--<strong>{{ $errors->first('login') }}</strong>--}}
+                                    {{--</span>--}}
+                                {{--@endif--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         {{--<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">--}}
                             {{--<label for="email" class="col-md-4 control-label">E-Mail Address</label>--}}
 
