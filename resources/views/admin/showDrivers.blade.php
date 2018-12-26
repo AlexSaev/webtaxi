@@ -14,18 +14,17 @@
         </tr>
         </thead>
         <tbody>
-        {{--@if($weathers != NULL)--}}
-        {{--@foreach($weathers as $weather)--}}
-        {{--<tr>--}}
-        {{--<td>{{$weather->api}}</td>--}}
-        {{--<td>{{$weather->city}}</td>--}}
-        {{--<td>{{$weather->weather_type}}</td>--}}
-        {{--<td>{{$weather->temperature}}</td>--}}
-        {{--<td>{{$weather->wind_speed}}</td>--}}
-        {{--<td>{{$weather->date}}</td>--}}
-        {{--</tr>--}}
-        {{--@endforeach--}}
-        {{--@endif--}}
+        @if($drivers != NULL)
+        @foreach($drivers as $driver)
+        <tr>
+            <td>{{$driver->license_number}}</td>
+            <td>{{$driver->surname}}</td>
+            <td>{{$driver->name}}</td>
+            <td>{{$driver->patronymic}}</td>
+            <td>{{$driver->password}}</td>
+        </tr>
+        @endforeach
+        @endif
         </tbody>
     </table>
 @endsection

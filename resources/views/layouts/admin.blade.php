@@ -27,22 +27,26 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
+
             <li class="nav-item active">
-                <a class="nav-link" href="{{route('admin.main')}}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{route('admin.main')}}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target ="#create">Create</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target ="#update">Update</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="modal" data-target ="#delete">Delete</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show tables</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="{{route('show.passengers')}}">Show passengers</a>
                     <a class="dropdown-item" href="{{route('show.drivers')}}">Show drivers</a>
                     <a class="dropdown-item" href="{{route('show.automobiles')}}">Show automobiles</a>
-                    <a class="dropdown-item" href="{{route('show.road.lists')}}">Show road lists</a>
+                    <a class="dropdown-item" href="{{route('show.roadLists')}}">Show road lists</a>
                     <a class="dropdown-item" href="{{route('show.orders')}}">Show orders</a>
                 </div>
             </li>

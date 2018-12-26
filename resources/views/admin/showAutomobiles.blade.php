@@ -13,18 +13,16 @@
         </tr>
         </thead>
         <tbody>
-        {{--@if($weathers != NULL)--}}
-        {{--@foreach($weathers as $weather)--}}
-        {{--<tr>--}}
-        {{--<td>{{$weather->api}}</td>--}}
-        {{--<td>{{$weather->city}}</td>--}}
-        {{--<td>{{$weather->weather_type}}</td>--}}
-        {{--<td>{{$weather->temperature}}</td>--}}
-        {{--<td>{{$weather->wind_speed}}</td>--}}
-        {{--<td>{{$weather->date}}</td>--}}
-        {{--</tr>--}}
-        {{--@endforeach--}}
-        {{--@endif--}}
+        @if($automobiles != NULL)
+        @foreach($automobiles as $automobile)
+        <tr>
+            <td>{{$automobile->car_number}}</td>
+            <td>{{$automobile->car_brand}}</td>
+            <td>{{$automobile->model}}</td>
+            <td>{{$automobile->color}}</td>
+        </tr>
+        @endforeach
+        @endif
         </tbody>
     </table>
 @endsection

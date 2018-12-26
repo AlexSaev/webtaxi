@@ -16,18 +16,19 @@
         </tr>
         </thead>
         <tbody>
-        {{--@if($weathers != NULL)--}}
-        {{--@foreach($weathers as $weather)--}}
-        {{--<tr>--}}
-        {{--<td>{{$weather->api}}</td>--}}
-        {{--<td>{{$weather->city}}</td>--}}
-        {{--<td>{{$weather->weather_type}}</td>--}}
-        {{--<td>{{$weather->temperature}}</td>--}}
-        {{--<td>{{$weather->wind_speed}}</td>--}}
-        {{--<td>{{$weather->date}}</td>--}}
-        {{--</tr>--}}
-        {{--@endforeach--}}
-        {{--@endif--}}
+        @if($orders != NULL)
+        @foreach($orders as $order)
+        <tr>
+            <td>{{$order->order_number}}</td>
+            <td>{{$order->point_of_arrival}}</td>
+            <td>{{$order->departure_point}}</td>
+            <td>{{$order->tpayment_for_travel}}</td>
+            <td>{{$order->date_of_the_travel}}</td>
+            <td>{{$order->phone_number}}</td>
+            <td>{{$order->license_number}}</td>
+        </tr>
+        @endforeach
+        @endif
         </tbody>
     </table>
 @endsection
