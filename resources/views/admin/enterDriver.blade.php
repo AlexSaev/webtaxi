@@ -1,17 +1,6 @@
 @extends('layouts.admin')
 
 @section('navbar')
-    {{--<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="createLable" aria-hidden="true">--}}
-    {{--<div class="modal-dialog" role="document">--}}
-    {{--<div class="modal-content">--}}
-    {{--<div class="modal-header">--}}
-    {{--<h5 class="modal-title" id="create">Create</h5>--}}
-    {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-    {{--<span aria-hidden="true">&times;</span>--}}
-    {{--</button>--}}
-    {{--</div>--}}
-    {{--<div class="modal-body">--}}
-    {{--<div class="container-fluid">--}}
     <h1>PPP</h1>
     <form method="post" action="{{route('enter.driver.info')}}">
         <div class="form-group">

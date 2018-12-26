@@ -283,7 +283,74 @@ class AdminController extends Controller
         return view('admin/showAutomobiles', ['automobiles' => $automobiles]);
     }
 
+    public function createAutomobile()
+    {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
 
+        $input = Input::only('carNumber', 'carBrand', 'model', 'color');
+        Automobile::create(
+            [
+                'car_number' => $input['carNumber'],
+                'car_brand' => $input['carBrand'],
+                'model' => $input['model'],
+                'color' => $input['color'],
+            ]);
+
+        return $this->showAutomobiles();
+    }
+
+    public function updateAutomobile()
+    {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
+        $input = Input::only('carNumber');
+
+        return view('admin/enterAutomobile', ['oldCarNumber' => $input['carNumber']]);
+    }
+
+    public function enterAutomobileInfo()
+    {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
+        $input = Input::only('carNumber', 'carBrand', 'model', 'color','oldCarNumber');
+
+
+        if($input['carBrand'])
+        {
+            Automobile::where('car_number', '=', $input['oldCarNumber'])
+                ->update(['car_brand' => $input['carBrand']]);
+        }
+
+        if($input['model'])
+        {
+            Automobile::where('car_number', '=', $input['oldCarNumber'])
+                ->update(['model' => $input['model']]);
+        }
+
+        if($input['color'])
+        {
+            Automobile::where('car_number', '=', $input['oldCarNumber'])
+                ->update(['color' => $input['color']]);
+        }
+
+        if($input['carNumber'])
+        {
+            Automobile::where('car_number', '=', $input['oldCarNumber'])
+                ->update(['car_number' => $input['carNumber']]);
+        }
+
+        return $this->showAutomobiles();
+    }
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public function showOrders()
     {
