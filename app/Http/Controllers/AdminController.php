@@ -168,7 +168,7 @@ class AdminController extends Controller
 
         $input = Input::only('licenseNumber');
         $licenseNumber = intval($input['licenseNumber']);
-        Passenger::where('license_number', '=', $licenseNumber)->delete();
+        Driver::where('license_number', '=', $licenseNumber)->delete();
 
         $licenseNumber = strval($licenseNumber);
         User::where('login', '=', $licenseNumber)->delete();
@@ -197,11 +197,12 @@ class AdminController extends Controller
                 'login' => strval($input['licenseNumber']),
                 'surname' => $input['surname'],
                 'name' => $input['name'],
+                'user_type' => 'driver',
                 'patronymic' => $input['patronymic'],
                 'password' => bcrypt($input['password']),
             ]);
 
-        return $this->showPassengers();
+        return $this->showDrivers();
     }
 
     public function updateDriver()
@@ -213,7 +214,7 @@ class AdminController extends Controller
 
         $input = Input::only('licenseNumber');
 
-        return view('admin/enterDrivers', ['oldLicenseNumber' => $input['licenseNumber']]);
+        return view('admin/enterDriver', ['oldLicenseNumber' => $input['licenseNumber']]);
     }
 
     public function enterDriverInfo()
@@ -229,7 +230,7 @@ class AdminController extends Controller
 
         if($input['surname'])
         {
-            Passenger::where('license_number', '=', $input['oldLicenseNumber'])
+            Driver::where('license_number', '=', $input['oldLicenseNumber'])
                 ->update(['surname' => $input['surname']]);
             User::where('login', '=', $input['oldLicenseNumber'])
                 ->update(['surname' => $input['surname']]);
@@ -237,7 +238,7 @@ class AdminController extends Controller
 
         if($input['name'])
         {
-            Passenger::where('license_number', '=', $input['oldLicenseNumber'])
+            Driver::where('license_number', '=', $input['oldLicenseNumber'])
                 ->update(['name' => $input['name']]);
             User::where('login', '=', $input['oldLicenseNumber'])
                 ->update(['name' => $input['name']]);
@@ -245,7 +246,7 @@ class AdminController extends Controller
 
         if($input['patronymic'])
         {
-            Passenger::where('license_number', '=', $input['oldLicenseNumber'])
+            Driver::where('license_number', '=', $input['oldLicenseNumber'])
                 ->update(['patronymic' => $input['patronymic']]);
             User::where('login', '=', $input['oldLicenseNumber'])
                 ->update(['patronymic' => $input['patronymic']]);
@@ -253,7 +254,7 @@ class AdminController extends Controller
 
         if($input['password'])
         {
-            Passenger::where('license_number', '=', $input['oldLicenseNumber'])
+            Driver::where('license_number', '=', $input['oldLicenseNumber'])
                 ->update(['password' => bcrypt($input['patronymic'])]);
             User::where('login', '=', $input['oldLicenseNumber'])
                 ->update(['password' => bcrypt($input['patronymic'])]);
@@ -261,7 +262,7 @@ class AdminController extends Controller
 
         if($input['licenseNumber'])
         {
-            Passenger::where('license_number', '=', $input['oldLicenseNumber'])
+            Driver::where('license_number', '=', $input['oldLicenseNumber'])
                 ->update(['license_number' => $input['licenseNumber']]);
             User::where('login', '=', $input['oldLicenseNumber'])
                 ->update(['login' => $input['licenseNumber']]);
