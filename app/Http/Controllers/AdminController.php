@@ -11,6 +11,7 @@ use App\Automobile;
 use App\Order;
 use App\RoadList;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -146,7 +147,7 @@ class AdminController extends Controller
 
         return $this->showPassengers();
     }
-
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public function showDrivers()
     {
         if(!Gate::allows('isAdmin'))
@@ -158,7 +159,7 @@ class AdminController extends Controller
 
         return view('admin/showDrivers', ['drivers' => $drivers]);
     }
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     public function deleteDriver()
     {
         if(!Gate::allows('isAdmin'))
@@ -283,6 +284,20 @@ class AdminController extends Controller
         return view('admin/showAutomobiles', ['automobiles' => $automobiles]);
     }
 
+    public function deleteAutomobile()
+    {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
+        $input = Input::only('carNumber');
+        $carNumber = $input['carNumber'];
+        Automobile::where('car_number', '=', $carNumber)->delete();
+
+        return $this->showAutomobiles();
+    }
+
     public function createAutomobile()
     {
         if(!Gate::allows('isAdmin'))
@@ -363,6 +378,7 @@ class AdminController extends Controller
 
         return view('admin/showOrders', ['orders' => $orders ]);
     }
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public function showRoadLists()
     {
@@ -376,5 +392,26 @@ class AdminController extends Controller
         return view('admin/showRoadLists', ['roadLists' => $roadLists]);
     }
 
+
+    public function createRoadList()
+    {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
+        $input = Input::only('validFrom', 'validUntill', 'carNumber', 'licenseNumber');
+//        $max =DB::table('road_lists')->count(RoadList::all());
+//        DB::statement("ALTER TABLE road_lists list_number = $max");
+        RoadList::create(
+            [
+                'valid_from' => $input['validFrom'],
+                'valid_untill' => $input['validUntill'],
+                'car_number' => $input['carNumber'],
+                'license_number' => $input['licenseNumber'],
+            ]);
+
+        return $this->showRoadLists();
+    }
 
 }

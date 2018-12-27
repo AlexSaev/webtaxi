@@ -28,7 +28,7 @@
         </tbody>
     </table>
 
-    <div class="modal fade" id="exampleModalAddCity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -39,26 +39,37 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form method="post" action="{{route('delete.passenger')}}">
+                        <form method="post" action="{{route('create.roadList')}}">
                             <div class="form-group">
-                                <lable for="exampleInputCity">City</lable>
-                                <input type="text" class="form-control" id="exampleInputCity" aria-descripbdby="cityHelp"
-                                       placeholder="City" name="cityName" value="">
-                                <small id="cityHelp" class="form-text text-muted">Enter city name</small>
+                                <lable for="create">Valid from</lable>
+                                <input type="text" class="form-control" id="InputID" aria-descripbdby="phoneHelp"
+                                       placeholder="2018-01-19" name="validFrom">
+                                <small id="carNumber" class="form-text text-muted">Enter road list starting date</small>
                             </div>
+
                             <div class="form-group">
-                                <lable for="exampleInputLat">Latitude</lable>
-                                <input type="text" class="form-control" id="exampleInputLat" placeholder="Latitude" name="lat" value="">
-                                <small id="latHelp" class="form-text text-muted">Enter latitude</small>
+                                <lable for="create">Valid untill</lable>
+                                <input type="text" class="form-control" id="InputID" aria-descripbdby="phoneHelp"
+                                       placeholder="2018-01-29" name="validUntill">
+                                <small id="carBrand" class="form-text text-muted">Enter road list ending date</small>
                             </div>
+
                             <div class="form-group">
-                                <lable for="exampleInputLon">Longitude</lable>
-                                <input type="text" class="form-control" id="exampleInputLon" placeholder="Longitude" name="lon" value="">
-                                <small id="lonHelp" class="form-text text-muted">Enter longitude</small>
+                                <lable for="create">Car number</lable>
+                                <input type="text" class="form-control" id="InputID" aria-descripbdby="phoneHelp"
+                                       placeholder="а777аа777" name="carNumber">
+                                <small id="licenseNumber" class="form-text text-muted">Enter car number</small>
+                            </div>
+
+                            <div class="form-group">
+                                <lable for="create">License number</lable>
+                                <input type="text" class="form-control" id="InputID" aria-descripbdby="phoneHelp"
+                                       placeholder="1122334455" name="licenseNumber">
+                                <small id="licenseNumber" class="form-text text-muted">Enter license number</small>
                             </div>
                             <div class="form-check">
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Send</button>
+                                    <button type="submit" class="btn btn-primary">Confirm</button>
                                 </div>
                                 {{csrf_field()}}
                             </div>
