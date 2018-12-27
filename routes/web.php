@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function()
 
 });
 
-Route::group(['prefix => passenger', 'middleware' => []], function ()
+Route::group(['prefix' => 'passenger', 'middleware' => []], function ()
 {
    Route::get('/main', 'PassengerController@mainPassengerPanel')->name('passenger.main');
 
