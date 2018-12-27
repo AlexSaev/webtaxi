@@ -51,11 +51,17 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function()
     Route::post('/updateRoadList', 'AdminController@updateRoadList')->name('update.roadList');
     Route::post('/enterRoadListInfo', 'AdminController@enterRoadListInfo')->name('enter.roadList.info');
 
-}
-);
+});
 
+Route::group(['prefix => passenger', 'middleware' => []], function ()
+{
+   Route::get('/main', 'PassengerController@mainPassengerPanel')->name('passenger.main');
 
+   Route::post('/makeOrder', 'PassengerController@makeOrder')->name('make.order');
 
+   Route::post('/checkOrder', 'PassengerController@checkOrder')->name('check.order');
 
+   Route::get('/showAllOrders', 'PassengerController@showAllOrders')->name('show.all.orders');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');

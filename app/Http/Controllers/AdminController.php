@@ -378,6 +378,106 @@ class AdminController extends Controller
 
         return view('admin/showOrders', ['orders' => $orders ]);
     }
+
+    public function createOrder()
+    {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
+        $input = Input::only('pointOfArrival', 'departurePoint', 'paymentForTravel',
+            'dateOfTheTravel', 'phoneNumber', 'licenseNumber');
+
+        Order::create(
+            [
+                'point_of_arrival' => $input['pointOfArrival'],
+                'departure_point' => $input['departurePoint'],
+                'payment_for_travel' => $input['paymentForTravel'],
+                'date_of_the_travel' => $input['dateOfTheTravel'],
+                'phone_number' => $input['phoneNumber'],
+                'license_number' => $input['licenseNumber'],
+            ]);
+
+        return $this->showOrders();
+    }
+
+    public function deleteOrder()
+    {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
+        $input = Input::only('orderNumber');
+        $orderNumber = $input['orderNumber'];
+        Order::where('order_number', '=', $orderNumber)->delete();
+
+        return $this->showOrders();
+    }
+
+    public function updateOrder()
+    {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
+        $input = Input::only('orderNumber');
+
+        return view('admin/enterOrder', ['oldOrderNumber' => $input['orderNumber']]);
+    }
+
+    public function enterOrderInfo()
+    {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
+        $input = Input::only('pointOfArrival', 'departurePoint', 'paymentForTravel',
+            'dateOfTheTravel', 'phoneNumber', 'licenseNumber', 'oldOrderNumber');
+
+        if($input['pointOfArrival'])
+        {
+            Order::where('order_number', '=', $input['oldOrderNumber'])
+                ->update(['point_of_arrival' => $input['pointOfArrival']]);
+        }
+
+        if($input['departurePoint'])
+        {
+            Order::where('order_number', '=', $input['oldOrderNumber'])
+                ->update(['departure_point' => $input['departurePoint']]);
+        }
+
+        if($input['paymentForTravel'])
+        {
+            Order::where('order_number', '=', $input['oldOrderNumber'])
+                ->update(['payment_for_travel' => doubleval($input['paymentForTravel'])]);
+            return "pupa";
+        }
+
+        if($input['dateOfTheTravel'])
+        {
+            Order::where('order_number', '=', $input['oldOrderNumber'])
+                ->update(['date_of_the_travel' => $input['dateOfTheTravel']]);
+        }
+
+        if($input['phoneNumber'])
+        {
+            Order::where('order_number', '=', $input['oldOrderNumber'])
+                ->update(['phone_number' => $input['phoneNumber']]);
+        }
+
+
+        if($input['licenseNumber'])
+        {
+            Order::where('order_number', '=', $input['oldOrderNumber'])
+                ->update(['license_number' => $input['licenseNumber']]);
+        }
+
+        return $this->showOrders();
+    }
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public function showRoadLists()
