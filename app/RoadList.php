@@ -10,5 +10,5 @@ class RoadList extends Model
 
     public $timestamps = FALSE;
 
-    protected $fillable =['valid_from', 'valid_untill', 'car_number', 'license_number'];
+    protected $fillable =['list_number', 'valid_from', 'valid_untill', 'car_number', 'license_number'];
 }

@@ -74,7 +74,7 @@
                             <div class="form-group">
                                 <lable for="create">licenseNumber</lable>
                                 <input type="text" class="form-control" id="InputID" aria-descripbdby="phoneHelp"
-                                       placeholder="88005553535" name="licenseNumber">
+                                       placeholder="1234567890" name="licenseNumber">
                                 <small id="licenseNumber" class="form-text text-muted">Enter pasenger phone number</small>
                             </div>
                             <div class="form-group">

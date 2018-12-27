@@ -32,7 +32,7 @@
         </div>
 
         <div>
-            <input type="hidden" value="{{$oldListNumber}}" name="oldCarNumber">
+            <input type="hidden" value="{{$oldListNumber}}" name="oldListNumber">
         </div>
 
         <div class="form-check">

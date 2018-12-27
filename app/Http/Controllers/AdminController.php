@@ -401,8 +401,10 @@ class AdminController extends Controller
         }
 
         $input = Input::only('validFrom', 'validUntill', 'carNumber', 'licenseNumber');
-//        $max =DB::table('road_lists')->count(RoadList::all());
-//        DB::statement("ALTER TABLE road_lists list_number = $max");
+        if($input['validFrom'] >= $input['validUntill'])
+        {
+            return "valid_from cannot be bigger then valid_untill";
+        }
         RoadList::create(
             [
                 'valid_from' => $input['validFrom'],
@@ -414,4 +416,66 @@ class AdminController extends Controller
         return $this->showRoadLists();
     }
 
+    public function deleteRoadList()
+    {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
+        $input = Input::only('listNumber');
+        $listNumber = $input['listNumber'];
+        RoadList::where('list_number', '=', $listNumber)->delete();
+
+        return $this->showRoadLists();
+    }
+
+    public function updateRoadList()
+    {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
+        $input = Input::only('listNumber');
+
+        return view('admin/enterRoadList', ['oldListNumber' => $input['listNumber']]);
+    }
+
+    public function enterRoadListInfo()
+    {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
+        $input = Input::only('validFrom', 'validUntill', 'carNumber', 'licenseNumber','oldListNumber');
+
+
+        if($input['validUntill'])
+        {
+            RoadList::where('list_number', '=', $input['oldListNumber'])
+                ->update(['valid_untill' => $input['validUntill']]);
+        }
+
+        if($input['validFrom'])
+        {
+            RoadList::where('list_number', '=', $input['oldListNumber'])
+                ->update(['valid_from' => $input['validFrom']]);
+        }
+
+        if($input['carNumber'])
+        {
+            RoadList::where('list_number', '=', $input['oldListNumber'])
+                ->update(['car_number' => $input['carNumber']]);
+        }
+
+        if($input['licenseNumber'])
+        {
+            RoadList::where('list_number', '=', $input['oldListNumber'])
+                ->update(['license_number' => $input['licenseNumber']]);
+        }
+
+        return $this->showRoadLists();
+    }
 }
