@@ -37,7 +37,12 @@ class PassengerController extends Controller
             abort(404, "Дядя, а вы точно пассажир?");
         }
 
-        $order = Order::all()->where('order_number', '=', DB::table('orders')->max('order_number'))->first();
+        $user = User::where('id', '=', Auth::user()->getAuthIdentifier())->first();
+
+        $order = Order::all()
+            ->where('order_number', '=', DB::table('orders')
+                ->where('phone_number', '=', $user['login'])
+                ->max('order_number'))->first();
 
         if (!$order->is_cancelled && !$order->license_number) {
             $order = NULL;
@@ -84,7 +89,12 @@ class PassengerController extends Controller
             return abort(404, "Дядя, а вы точно пассажир?");
         }
 
-        $order = Order::all()->where('order_number', '=', DB::table('orders')->max('order_number'))->first();
+        $user = User::where('id', '=', Auth::user()->getAuthIdentifier())->first();
+
+        $order = Order::all()
+            ->where('order_number', '=', DB::table('orders')
+                ->where('phone_number', '=', $user['login'])
+                ->max('order_number'))->first();
 
         if ($order) {
             $message = NULL;

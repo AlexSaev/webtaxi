@@ -52,6 +52,8 @@ Route::group(['prefix' => 'passenger', 'middleware' => []], function ()
 
 Route::group(['prefix' => 'driver', 'middleware' => []], function ()
 {
+    Route::get('/main', 'DriverController@mainDriverPanel')->name('driver.main');
+
     Route::post('/takeOrder', 'DriverController@takeOrder')->name('take.order');
 
     Route::get('/showAvailableOrders', 'DriverController@showAvailableOrders')->name('show.available.orders');
