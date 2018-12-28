@@ -35,7 +35,7 @@
                 <a class="nav-link" href="#" data-toggle="modal" data-target ="#make">Make order</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="modal" data-target ="#check">Check order</a>
+                <a class="nav-link" href="{{route('check.order')}}">Check current order</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('show.all.orders')}}">Show all orders</a>

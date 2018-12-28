@@ -55,13 +55,13 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function()
 
 Route::group(['prefix' => 'passenger', 'middleware' => []], function ()
 {
-   Route::get('/main', 'PassengerController@mainPassengerPanel')->name('passenger.main');
+   Route::get('/main', 'PassengerController@mainPassengerPanel')->name('passenger.main'); // gotovo
 
    Route::post('/makeOrder', 'PassengerController@makeOrder')->name('make.order');
 
-   Route::post('/checkOrder', 'PassengerController@checkOrder')->name('check.order');
+   Route::get('/checkOrder', 'PassengerController@checkOrder')->name('check.order');
 
-   Route::get('/showAllOrders', 'PassengerController@showAllOrders')->name('show.all.orders');
+   Route::get('/showAllOrders', 'PassengerController@showAllOrders')->name('show.all.orders'); //gotovo
 
    Route::get('/checkSomething', 'PassengerController@checkSomething')->name('check.something');
 });

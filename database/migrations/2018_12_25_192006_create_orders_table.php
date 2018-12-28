@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->increments('order_number');
             $table->string('point_of_arrival', 70);
             $table->string('departure_point', 70);
-            $table->double('payment_for_travel');
+            $table->double('payment_for_travel')->default(200);
             $table->dateTime('date_of_the_travel');
             $table->UnsignedBigInteger('phone_number');
             $table->foreign('phone_number')->references('phone_number')->on('passengers')
