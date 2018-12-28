@@ -13,6 +13,7 @@
             <th scope="col">Date of the travel</th>
             <th scope="col">Phone number</th>
             <th scope="col">License number</th>
+            <th scope="col">Is cancelled</th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
             <td>{{$order->date_of_the_travel}}</td>
             <td>{{$order->phone_number}}</td>
             <td>{{$order->license_number}}</td>
+            <td>{{$order->is_cancelled}}</td>
         </tr>
         @endforeach
         @endif

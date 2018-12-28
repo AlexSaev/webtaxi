@@ -45,4 +45,20 @@ class PassengerController extends Controller
 
         return view('passenger/showPassengerOrders', ['name' => $this->getName(), 'orders' => $orders]);
     }
+
+    public function checkSomething()
+    {
+        date_default_timezone_set('Europe/Moscow');
+
+        $currentDate = date('Y-m-d H:i:s');
+
+//        $currentDate = date('2018-12-31 12:12:12');
+
+        $orders = Order::where('date_of_the_travel', '<', $currentDate)
+            ->where('license_number', '=', NULL)
+            ->update(['is_cancelled' => true]);
+
+
+        return $orders;
+    }
 }

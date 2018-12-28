@@ -62,6 +62,8 @@ Route::group(['prefix' => 'passenger', 'middleware' => []], function ()
    Route::post('/checkOrder', 'PassengerController@checkOrder')->name('check.order');
 
    Route::get('/showAllOrders', 'PassengerController@showAllOrders')->name('show.all.orders');
+
+   Route::get('/checkSomething', 'PassengerController@checkSomething')->name('check.something');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

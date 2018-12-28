@@ -16,29 +16,34 @@
         <tbody>
         @if($orders != NULL)
             @foreach($orders as $order)
-                @if($order->license_number)
+                @if($order->is_cancelled)
                 <tr>
                     <td>{{$order->order_number}}</td>
                     <td>{{$order->point_of_arrival}}</td>
                     <td>{{$order->departure_point}}</td>
                     <td>{{$order->payment_for_travel}}</td>
                     <td>{{$order->date_of_the_travel}}</td>
-                    <td>Finished</td>
+                    <td>Cancelled</td>
                 </tr>
-                @else
+                @elseif(!$order->license_number)
                     <tr>
                         <td>{{$order->order_number}}</td>
                         <td>{{$order->point_of_arrival}}</td>
                         <td>{{$order->departure_point}}</td>
                         <td>{{$order->payment_for_travel}}</td>
                         <td>{{$order->date_of_the_travel}}</td>
-                        <td>Cancelled/In progress</td>
+                        <td>In progress</td>
                     </tr>
-
+                    @else
+                    <tr>
+                        <td>{{$order->order_number}}</td>
+                        <td>{{$order->point_of_arrival}}</td>
+                        <td>{{$order->departure_point}}</td>
+                        <td>{{$order->payment_for_travel}}</td>
+                        <td>{{$order->date_of_the_travel}}</td>
+                        <td>Finished</td>
+                    </tr>
                 @endif
-
-
-
             @endforeach
         @endif
         </tbody>

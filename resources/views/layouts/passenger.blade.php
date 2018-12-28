@@ -41,7 +41,7 @@
                 <a class="nav-link" href="{{route('show.all.orders')}}">Show all orders</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('show.all.orders')}}" data-target ="#check">TESTING FUNCTIONS</a>
+                <a class="nav-link" href="{{route('check.something')}}" data-target ="#check">TESTING FUNCTIONS</a>
             </li>
         </ul>
     </div>
