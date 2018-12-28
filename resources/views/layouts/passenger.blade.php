@@ -40,9 +40,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('show.all.orders')}}">Show all orders</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('check.something')}}" data-target ="#check">TESTING FUNCTIONS</a>
-            </li>
         </ul>
     </div>
 </nav>
@@ -50,6 +47,44 @@
 <h1>!!!</h1>
 
 @yield('navbar')
+
+<div class="modal fade" id="make" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="make">Make order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form method="post" action="{{route('make.order')}}">
+                        <div class="form-group">
+                            <lable for="create">Point of arrival</lable>
+                            <input type="text" class="form-control" id="InputID" aria-descripbdby="phoneHelp"
+                                   placeholder="Севастополь, ул.Университетская 33" name="pointOfArrival">
+                            <small id="pointOfArrival" class="form-text text-muted">Enter point of arrival</small>
+                        </div>
+
+                        <div class="form-group">
+                            <lable for="create">Departure point</lable>
+                            <input type="text" class="form-control" id="InputID" aria-descripbdby="phoneHelp"
+                                   placeholder="Джанкой, ул.Интернациональная 177" name="departurePoint">
+                            <small id="departurePoint" class="form-text text-muted">Enter departure point</small>
+                        </div>
+                        <div class="form-check">
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Confirm</button>
+                            </div>
+                            {{csrf_field()}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

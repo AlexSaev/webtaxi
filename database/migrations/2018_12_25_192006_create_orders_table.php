@@ -25,7 +25,7 @@ class CreateOrdersTable extends Migration
             $table->UnsignedBigInteger('license_number')->nullable();
             $table->foreign('license_number')->references('license_number')->on('drivers')
                 ->onDelete('restrict')->onUpdate('cascade');
-            $table->boolean('is_cancelled')->default(false);
+            $table->boolean('is_cancelled')->default(0);
         });
     }
 

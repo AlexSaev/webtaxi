@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -55,15 +44,21 @@ Route::group(['prefix' => 'admin', 'middleware' => []], function()
 
 Route::group(['prefix' => 'passenger', 'middleware' => []], function ()
 {
-   Route::get('/main', 'PassengerController@mainPassengerPanel')->name('passenger.main'); // gotovo
-
+   Route::get('/main', 'PassengerController@mainPassengerPanel')->name('passenger.main');
    Route::post('/makeOrder', 'PassengerController@makeOrder')->name('make.order');
-
    Route::get('/checkOrder', 'PassengerController@checkOrder')->name('check.order');
+   Route::get('/showAllOrders', 'PassengerController@showAllOrders')->name('show.all.orders');
+});
 
-   Route::get('/showAllOrders', 'PassengerController@showAllOrders')->name('show.all.orders'); //gotovo
+Route::group(['prefix' => 'driver', 'middleware' => []], function ()
+{
+    Route::post('/takeOrder', 'DriverController@takeOrder')->name('take.order');
 
-   Route::get('/checkSomething', 'PassengerController@checkSomething')->name('check.something');
+    Route::get('/showAvailableOrders', 'DriverController@showAvailableOrders')->name('show.available.orders');
+
+    Route::get('/showTakenOrder', 'DriverController@showTakenOrder')->name('show.taken.order');
+
+    Route::get('/showFinishedOrders', 'DriverController@showFinishedOrders')->name('show.finished.orders');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
