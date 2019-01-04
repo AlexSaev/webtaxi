@@ -20,7 +20,8 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Navbar</a>
+    {{--<a class="navbar-brand" href="#">Navbar</a>--}}
+    <img src="{{asset('img/logo.png')}}" alt="idite otsuda" class="navbar-link" width="35">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -49,6 +50,20 @@
                     <a class="dropdown-item" href="{{route('show.roadLists')}}">Show road lists</a>
                     <a class="dropdown-item" href="{{route('show.orders')}}">Show orders</a>
                 </div>
+            </li>
+            {{--<li>--}}
+                {{--<a class="nav-link" href="{{route('logout')}}">Log out</a>--}}
+            {{--</li>--}}
+            <li>
+                <a class="nav-link" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                </form>
             </li>
         </ul>
     </div>

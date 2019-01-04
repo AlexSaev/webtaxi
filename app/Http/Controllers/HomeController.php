@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use App\User;
+
 
 class HomeController extends Controller
 {
@@ -21,8 +24,23 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        if(Gate::allows('isAdmin'))
+        {
+            $adminController = new AdminController();
+            return $adminController->mainAdminPanel();
+        }
+        elseif (Gate::allows('isDriver'))
+        {
+            $driverController = new DriverController();
+            return $driverController->mainDriverPanel();
+        }
+        elseif (Gate::allows('isPassenger'))
+        {
+            $passengerController = new PassengerController();
+            return $passengerController->mainPassengerPanel();
+        }
+//        return view('home');
     }
 }

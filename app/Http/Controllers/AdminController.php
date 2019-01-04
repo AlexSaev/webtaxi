@@ -501,19 +501,34 @@ class AdminController extends Controller
         }
 
         $input = Input::only('validFrom', 'validUntill', 'carNumber', 'licenseNumber');
-        if($input['validFrom'] >= $input['validUntill'])
-        {
-            return "valid_from cannot be bigger then valid_untill";
-        }
-        RoadList::create(
-            [
-                'valid_from' => $input['validFrom'],
-                'valid_untill' => $input['validUntill'],
-                'car_number' => $input['carNumber'],
-                'license_number' => $input['licenseNumber'],
-            ]);
 
-        return $this->showRoadLists();
+//        // проверка на корректность ввода даты для путевого листа
+//        if($input['validFrom'] >= $input['validUntill'])
+//        {
+//            return "valid_from cannot be bigger then valid_untill";
+//        }
+
+        // проверяем корректность ввода даты
+        $checkDates = RoadList::all()->where('car_number', '=', $input['carNumber'])
+            ->where('license_number', '=', $input['licenseNumber'])
+            ->where('valid_untill', '>=', $input['validFrom']);
+
+        if (sizeof($checkDates) != 0 && $input['validFrom'] >= $input['validUntill'])
+        {
+            return "Invalid date for road list";
+        }
+        else
+        {
+            RoadList::create(
+                [
+                    'valid_from' => $input['validFrom'],
+                    'valid_untill' => $input['validUntill'],
+                    'car_number' => $input['carNumber'],
+                    'license_number' => $input['licenseNumber'],
+                ]);
+
+            return $this->showRoadLists();
+        }
     }
 
     public function deleteRoadList()
@@ -551,6 +566,16 @@ class AdminController extends Controller
 
         $input = Input::only('validFrom', 'validUntill', 'carNumber', 'licenseNumber','oldListNumber');
 
+        // проверка на корректный ввод даты
+        $checkDates = RoadList::all()->where('car_number', '=', $input['carNumber'])
+            ->where('license_number', '=', $input['licenseNumber'])
+            ->where('valid_untill', '>=', $input['validFrom']
+            ->where('list_number', '!=', $input['oldListNumber']));
+
+        if (sizeof($checkDates) != 0 && $input['validFrom'] >= $input['validUntill'])
+        {
+            return "Invalid date for road list";
+        }
 
         if($input['validUntill'])
         {

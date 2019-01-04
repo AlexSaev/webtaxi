@@ -64,3 +64,5 @@ Route::group(['prefix' => 'driver', 'middleware' => []], function ()
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/main', '')
