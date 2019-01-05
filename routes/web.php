@@ -65,4 +65,6 @@ Route::group(['prefix' => 'driver', 'middleware' => []], function ()
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/getTravelDistance', 'PriceController@getTravelDistance')->name('get.distance');
+
 //Route::get('/main', '')
