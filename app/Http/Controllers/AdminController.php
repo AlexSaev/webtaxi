@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Gate;
 use App\User;
 use App\Passenger;
 use App\Driver;
@@ -17,18 +17,33 @@ class AdminController extends Controller
 {
     public function mainAdminPanel()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         return view('admin/adminMain');
     }
 
     public function showPassengers()
     {
-        $passengers = Passenger::all();
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
+        $passengers = Passenger::all()->orderBy('phone_number');
 
         return view('admin/showPassengers', ['passengers' => $passengers]);
     }
 
     public function deletePassenger()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('phoneNumber');
         $phoneNumber = intval($input['phoneNumber']);
         Passenger::where('phone_number', '=', $phoneNumber)->delete();
@@ -41,6 +56,11 @@ class AdminController extends Controller
 
     public function createPassenger()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('phoneNumber', 'surname', 'name', 'patronymic', 'password');
         Passenger::create(
             [
@@ -64,7 +84,10 @@ class AdminController extends Controller
 
     public function updatePassenger()
     {
-        
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
 
         $input = Input::only('phoneNumber');
 
@@ -73,6 +96,11 @@ class AdminController extends Controller
 
     public function enterPassengerInfo()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('phoneNumber', 'surname', 'name', 'patronymic',
             'password', 'oldPhoneNumber');
 
@@ -122,7 +150,10 @@ class AdminController extends Controller
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public function showDrivers()
     {
-        
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
 
         $drivers = Driver::all();
 
@@ -131,6 +162,11 @@ class AdminController extends Controller
 
     public function deleteDriver()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('licenseNumber');
         $licenseNumber = intval($input['licenseNumber']);
         Driver::where('license_number', '=', $licenseNumber)->delete();
@@ -143,6 +179,11 @@ class AdminController extends Controller
 
     public function createDriver()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('licenseNumber', 'surname', 'name', 'patronymic', 'password');
         Driver::create(
             [
@@ -167,6 +208,11 @@ class AdminController extends Controller
 
     public function updateDriver()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('licenseNumber');
 
         return view('admin/enterDriver', ['oldLicenseNumber' => $input['licenseNumber']]);
@@ -174,6 +220,11 @@ class AdminController extends Controller
 
     public function enterDriverInfo()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('licenseNumber', 'surname', 'name', 'patronymic',
             'password', 'oldLicenseNumber');
 
@@ -223,6 +274,11 @@ class AdminController extends Controller
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public function showAutomobiles()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $automobiles = Automobile::all();
 
         return view('admin/showAutomobiles', ['automobiles' => $automobiles]);
@@ -230,6 +286,11 @@ class AdminController extends Controller
 
     public function deleteAutomobile()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('carNumber');
         $carNumber = $input['carNumber'];
         Automobile::where('car_number', '=', $carNumber)->delete();
@@ -239,6 +300,11 @@ class AdminController extends Controller
 
     public function createAutomobile()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('carNumber', 'carBrand', 'model', 'color');
         Automobile::create(
             [
@@ -253,6 +319,11 @@ class AdminController extends Controller
 
     public function updateAutomobile()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('carNumber');
 
         return view('admin/enterAutomobile', ['oldCarNumber' => $input['carNumber']]);
@@ -260,6 +331,11 @@ class AdminController extends Controller
 
     public function enterAutomobileInfo()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('carNumber', 'carBrand', 'model', 'color','oldCarNumber');
 
 
@@ -293,6 +369,11 @@ class AdminController extends Controller
 
     public function showOrders()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $orders = Order::all();
 
         return view('admin/showOrders', ['orders' => $orders ]);
@@ -300,6 +381,11 @@ class AdminController extends Controller
 
     public function createOrder()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('pointOfArrival', 'departurePoint', 'paymentForTravel',
             'dateOfTheTravel', 'phoneNumber', 'licenseNumber');
 
@@ -318,6 +404,11 @@ class AdminController extends Controller
 
     public function deleteOrder()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('orderNumber');
         $orderNumber = $input['orderNumber'];
         Order::where('order_number', '=', $orderNumber)->delete();
@@ -327,6 +418,11 @@ class AdminController extends Controller
 
     public function updateOrder()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('orderNumber');
 
         return view('admin/enterOrder', ['oldOrderNumber' => $input['orderNumber']]);
@@ -334,6 +430,11 @@ class AdminController extends Controller
 
     public function enterOrderInfo()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('pointOfArrival', 'departurePoint', 'paymentForTravel',
             'dateOfTheTravel', 'phoneNumber', 'licenseNumber', 'oldOrderNumber');
 
@@ -381,6 +482,11 @@ class AdminController extends Controller
 
     public function showRoadLists()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $roadLists = RoadList::all();
 
         return view('admin/showRoadLists', ['roadLists' => $roadLists]);
@@ -389,6 +495,11 @@ class AdminController extends Controller
 
     public function createRoadList()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('validFrom', 'validUntill', 'carNumber', 'licenseNumber');
 
 //        // проверка на корректность ввода даты для путевого листа
@@ -422,6 +533,11 @@ class AdminController extends Controller
 
     public function deleteRoadList()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('listNumber');
         $listNumber = $input['listNumber'];
         RoadList::where('list_number', '=', $listNumber)->delete();
@@ -431,6 +547,11 @@ class AdminController extends Controller
 
     public function updateRoadList()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('listNumber');
 
         return view('admin/enterRoadList', ['oldListNumber' => $input['listNumber']]);
@@ -438,13 +559,18 @@ class AdminController extends Controller
 
     public function enterRoadListInfo()
     {
+        if(!Gate::allows('isAdmin'))
+        {
+            abort(404, "Дядя, а вы точно админ?");
+        }
+
         $input = Input::only('validFrom', 'validUntill', 'carNumber', 'licenseNumber','oldListNumber');
 
         // проверка на корректный ввод даты
         $checkDates = RoadList::all()->where('car_number', '=', $input['carNumber'])
             ->where('license_number', '=', $input['licenseNumber'])
             ->where('valid_untill', '>=', $input['validFrom']
-            ->where('list_number', '!=', $input['oldListNumber']));
+                ->where('list_number', '!=', $input['oldListNumber']));
 
         if (sizeof($checkDates) != 0 && $input['validFrom'] >= $input['validUntill'])
         {

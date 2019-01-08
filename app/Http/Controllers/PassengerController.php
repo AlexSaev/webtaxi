@@ -24,19 +24,11 @@ class PassengerController extends Controller
 
     public function mainPassengerPanel()
     {
-        if (!Gate::allows('isPassenger')) {
-            return abort(404, "Дядя, а вы точно пассажир?");
-        }
-
         return view('passenger/passengerMain', ['name' => $this->getName()]);
     }
 
     public function makeOrder()
     {
-        if (!Gate::allows('isPassenger')) {
-            abort(404, "Дядя, а вы точно пассажир?");
-        }
-
         $user = User::where('id', '=', Auth::user()->getAuthIdentifier())->first();
 
         $order = Order::all()
@@ -72,10 +64,6 @@ class PassengerController extends Controller
 
     public function showAllOrders()
     {
-        if (!Gate::allows('isPassenger')) {
-            return abort(404, "Дядя, а вы точно пассажир?");
-        }
-
         $user = User::where('id', '=', Auth::user()->getAuthIdentifier())->first();
 
         $orders = Order::all()->where('phone_number', '=', $user['login']);
@@ -85,10 +73,6 @@ class PassengerController extends Controller
 
     public function checkOrder()
     {
-        if (!Gate::allows('isPassenger')) {
-            return abort(404, "Дядя, а вы точно пассажир?");
-        }
-
         $user = User::where('id', '=', Auth::user()->getAuthIdentifier())->first();
 
         $order = Order::all()
