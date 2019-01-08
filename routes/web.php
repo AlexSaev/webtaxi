@@ -6,7 +6,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['prefix' => 'admin', 'middleware' => []], function()
+Route::group(['prefix' => 'admin', 'middleware' => ['is.admin']], function()
 {
     Route::get('/main', 'AdminController@mainAdminPanel')->name('admin.main');
 
